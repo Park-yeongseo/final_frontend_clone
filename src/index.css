@@ -1,0 +1,82 @@
+@import "normalize.css";
+
+/* 폰트 선언 */
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/PretendardVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CSS Reset - 더 강력한 리셋 */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 헤딩 요소 명시적 리셋 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+/* 기타 요소 리셋 */
+p,
+ul,
+ol,
+li,
+blockquote,
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+/* 전역 스타일 */
+html,
+body {
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
+  overflow-x: hidden;
+}
+
+/* 접근성 숨김 유틸리티 클래스 */
+.a11y-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.custom-success-toast {
+  background-color: #00a63e !important;
+}
+
+.custom-error-toast {
+  background-color: #d4183d !important;
+}
+
+html {
+  overflow: hidden;
+}

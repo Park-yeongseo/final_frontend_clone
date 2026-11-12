@@ -1,0 +1,63 @@
+import { style } from "@vanilla-extract/css";
+import { vars } from "@/design-system";
+
+export const card = style({
+  padding: vars.spacing.lg,
+  border: `1px solid ${vars.color.line}`,
+  borderRadius: vars.borderRadius.lg,
+  backgroundColor: vars.color.white,
+  display: "flex",
+  flexDirection: "column",
+  gap: vars.spacing.lg,
+  gridColumn: "span 2",
+
+  h3: {
+    fontSize: vars.typography.fontSize.md,
+    fontWeight: vars.typography.fontWeight.normal,
+    flex: 1,
+  },
+
+  "@media": {
+    "(max-width: 768px)": {
+      padding: vars.spacing.md,
+      gap: vars.spacing.md,
+
+      h3: {
+        fontSize: vars.typography.fontSize.sm,
+        fontWeight: vars.typography.fontWeight.normal,
+        flex: 1,
+      },
+    },
+  },
+});
+
+export const grid = style({
+  display: "grid",
+  gridTemplateColumns: "repeat(2, 1fr)",
+  gap: vars.spacing.lg,
+
+  "@media": {
+    "(max-width: 1024px)": {
+      gridTemplateColumns: "1fr",
+      gap: `${vars.spacing.lg} 0`,
+    },
+    "(max-width: 768px)": {
+      gap: vars.spacing.md,
+    },
+  },
+});
+
+export const innerGrid = style({
+  full: {
+    "@media": {
+      "(max-width: 768px)": {
+        gridTemplateColumns: "1fr",
+        gap: `${vars.spacing.md} 0`,
+      },
+    },
+  },
+});
+
+export const titleWrap = style({
+  display: "flex",
+});

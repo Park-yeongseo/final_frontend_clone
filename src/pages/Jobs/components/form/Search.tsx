@@ -1,0 +1,68 @@
+import { useForm } from "@tanstack/react-form";
+import { z } from "zod";
+
+import { Button } from "@/components/index.ts";
+import { form, formModal, fieldContainer } from "./Search.css.ts";
+import Text from "@/components/FormElem/text/Text.tsx";
+
+const searchSchema = z.object({
+  value: z.string(),
+});
+
+interface SearchProps {
+  isModal?: boolean;
+  onSearch: (keyword: string) => void;
+}
+
+export default function Search({ isModal = false, onSearch }: SearchProps) {
+  const searchForm = useForm({
+    defaultValues: {
+      value: "",
+    },
+    onSubmit: async ({ value }) => {
+      try {
+        searchSchema.parse(value);
+        onSearch(value.value.trim());
+      } catch (error) {
+        if (error instanceof z.ZodError) {
+          console.error("검증 오류:", error.issues);
+        }
+      }
+    },
+  });
+
+  return (
+    <form
+      id="searchForm"
+      className={isModal ? formModal : form}
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        searchForm.handleSubmit();
+      }}
+    >
+      <searchForm.Field name="value">
+        {(field) => (
+          <div className={fieldContainer}>
+            <Text
+              value={field.state.value}
+              onChange={field.handleChange}
+              onBlur={field.handleBlur}
+              error={field.state.meta.errors.join(", ")}
+              placeholder="채용공고 제목, 회사명으로 검색..."
+            />
+            <Button
+              color="blue"
+              icon="SEARCH"
+              text="검색"
+              buttonType="submit"
+              form="searchForm"
+              callback={() => {}}
+              widthStyle="fit"
+            />
+          </div>
+        )}
+      </searchForm.Field>
+    </form>
+  );
+}
