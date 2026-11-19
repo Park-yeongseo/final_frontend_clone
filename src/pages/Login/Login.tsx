@@ -51,7 +51,7 @@ async function loginProcess(formData: LoginForm, navigate: ReturnType<typeof use
 const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
 const GOOGLE_CLIENT_ID = "62731178017-jjj8blkivn8agl7gi99981km5ro2jpbp.apps.googleusercontent.com";
-const GOOGLE_REDIRECT_URI = isLocal ? "http://localhost:5173/frontend/googleCallback" : "https://modufinalproject.github.io/frontend/googleCallback";
+const GOOGLE_REDIRECT_URI = isLocal ? "http://localhost:5173/frontend/googleCallback" : "https://park-yeongseo.github.io/frontend/googleCallback";
 
 // 랜덤 state 값 생성 (CSRF 공격 방지)
 function generateCryptoRandomState(): string {
