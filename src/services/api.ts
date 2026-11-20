@@ -145,6 +145,26 @@ export async function loginWithGoogle(
   }
 }
 
+// 게스트(체험) 로그인
+export async function loginAsGuest(): Promise<{ access_token: string; user: any }> {
+  setLoading(true);
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/guest`, {
+      method: "POST",
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.detail || "게스트 로그인에 실패했습니다.");
+    }
+
+    return data;
+  } finally {
+    setLoading(false);
+  }
+}
+
 // 탈퇴유저 복구
 export async function recoverDeletedUser(userId: string): Promise<{ access_token: string; user: any }> {
   setLoading(true);

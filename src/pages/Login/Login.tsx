@@ -7,7 +7,7 @@ import { loginContainer, formWrapper, formContent, logoSection, titleSection, fo
 import Button from "@/components/Button/Button";
 import Text from "@/components/FormElem/text/Text";
 import logo from "@/assets/logo/logo.svg";
-import { loginWithEmail } from "@/services/api";
+import { loginWithEmail, loginAsGuest } from "@/services/api";
 import { saveAuthToken } from "@/services/auth";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -112,7 +112,19 @@ export default function Login() {
   const { setLoginToken } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
+  const handleGuestLogin = async () => {
+    try {
+      setError(null);
+      const response = await loginAsGuest();
+      saveAuthToken(response.access_token, response.user);
+      setLoginToken(true);
+      toast.success("게스트로 체험을 시작합니다.");
+      navigate("/dashboard", { replace: true });
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "게스트 로그인에 실패했습니다";
+      toast.error(message);
+    }
+  };
   const form = useForm({
     defaultValues: {
       email: "",
@@ -239,6 +251,12 @@ export default function Login() {
               text="Google으로 계속하기"
               callback={() => {socialLogin("google")}}
               icon="GOOGLE"
+            />
+            <Button
+              widthStyle="full"
+              color="gray"
+              text="게스트로 체험하기"
+              callback={handleGuestLogin}
             />
           </section>
         </div>
